@@ -1,7 +1,17 @@
+const crypto = require('crypto');
+
 exports.handler = async (event, context, callback) => {
     try{
-        const operation  = event.httpMethod;
-        console.log('mylog', event)
+        const operation = event.httpMethod;
+
+        const input = JSON.parse(event.body)['ARN-INPUT'];
+        const {service, region, account, resource} = input;
+
+        console.log('service', service);
+        console.log('region', region);
+        console.log('account', account);
+        console.log('resource', resource);
+
         switch (operation) {
             case 'GET':
                 callback(null, {
